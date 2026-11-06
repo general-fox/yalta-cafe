@@ -41,7 +41,6 @@
         <a class="footer-brand" href="index.html" aria-label="Кафе «Ялта», главная"><img src="assets/yalta.svg?v=3" width="132" height="42" alt="Ялта"></a>
         <p>Кафе домашней кухни</p>
         <nav aria-label="Навигация внизу страницы">${links}${booking}</nav>
-        <small>Демонстрационная версия для согласования</small>
       </div>
     </footer>
     <dialog class="panel cart-panel" data-dialog="cart" aria-labelledby="cart-title">
