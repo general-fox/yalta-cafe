@@ -14,7 +14,6 @@ const products = new Map();
 for (const card of document.querySelectorAll("[data-product]")) {
   const { product: id, name, category, price } = card.dataset;
   const button = card.querySelector("[data-add]");
-  const label = button?.querySelector("[data-add-label]");
   const photo = card.querySelector("img");
 
   if (id && name && Number(price) > 0 && Number.isFinite(Number(price))) {
@@ -25,8 +24,8 @@ for (const card of document.querySelectorAll("[data-product]")) {
       price: Number(price),
       card,
       button,
-      label,
-      initialLabel: label?.textContent,
+      buttonCount: button?.querySelector("[data-add-count]"),
+      buttonLabel: button?.getAttribute("aria-label"),
       photo: photo?.getAttribute("src"),
     });
   }
@@ -148,12 +147,18 @@ function renderCart() {
   for (const display of document.querySelectorAll("[data-cart-count]")) {
     display.textContent = count;
   }
-  for (const { id, button, label, initialLabel } of products.values()) {
+  for (const { id, button, buttonCount, buttonLabel } of products.values()) {
     if (!button) continue;
     const quantity = cart.get(id) ?? 0;
     button.toggleAttribute("data-in-cart", quantity > 0);
     button.disabled = quantity >= quantityLimit;
-    if (label) label.textContent = quantity ? `В корзине · ${quantity}` : initialLabel;
+    if (buttonCount) {
+      buttonCount.textContent = quantity || "";
+      buttonCount.hidden = quantity === 0;
+    }
+    if (buttonLabel) {
+      button.setAttribute("aria-label", quantity ? `${buttonLabel}. В корзине ${quantity}.` : buttonLabel);
+    }
   }
 
   if (cartItems) {
@@ -224,15 +229,22 @@ function closeMobileNav() {
   }
 }
 
-function today() {
-  const date = new Date();
+function dateValue(date) {
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   return `${date.getFullYear()}-${month}-${day}`;
 }
 
 const dateInput = bookingForm?.querySelector('input[name="date"]');
-if (dateInput) dateInput.min = today();
+const bookingTime = bookingForm?.querySelector('[name="time"]');
+if (dateInput) {
+  const nextDay = new Date();
+  dateInput.min = dateValue(nextDay);
+  if (!dateInput.value) {
+    nextDay.setDate(nextDay.getDate() + 1);
+    dateInput.value = dateValue(nextDay);
+  }
+}
 
 cartDialog?.addEventListener("close", closeCheckout);
 
@@ -257,21 +269,30 @@ checkoutForm?.addEventListener("submit", (event) => {
 });
 
 bookingForm?.addEventListener("input", () => {
+  bookingTime?.setCustomValidity("");
   if (bookingStatus) bookingStatus.textContent = "";
 });
 
 bookingForm?.addEventListener("submit", (event) => {
   event.preventDefault();
-  if (dateInput) dateInput.min = today();
+  const now = new Date();
+  if (dateInput) dateInput.min = dateValue(now);
   if (!bookingForm.reportValidity() || !bookingStatus) return;
 
   const data = new FormData(bookingForm);
-  const date = new Date(`${data.get("date")}T12:00:00`);
   const time = data.get("time");
   const guests = data.get("guests");
-  if (Number.isNaN(date.getTime()) || !time || !guests) return;
+  const visit = new Date(`${data.get("date")}T${time}`);
+  if (Number.isNaN(visit.getTime()) || !guests) return;
+  if (visit <= now && bookingTime) {
+    bookingTime.setCustomValidity("Выберите время будущего визита.");
+    bookingTime.reportValidity();
+    return;
+  }
 
-  bookingStatus.textContent = `Пример брони: ${bookingDate.format(date)}, ${time}. Гостей: ${guests}. Онлайн-бронирование появится после подключения сервиса.`;
+  const guestCount = new Intl.PluralRules("ru-RU").select(Number(guests));
+  const guestLabel = { one: "гость", few: "гостя", many: "гостей" }[guestCount] ?? "гостя";
+  bookingStatus.textContent = `Демобронь · ${bookingDate.format(visit)} в ${time} · ${guests} ${guestLabel}.`;
 });
 
 for (const dialog of dialogs.values()) {
@@ -309,7 +330,6 @@ document.addEventListener("click", (event) => {
     const previousDialog = control.closest("dialog[open]");
     if (previousDialog && previousDialog !== dialog) previousDialog.close();
     closeMobileNav();
-    if (dialog === dialogs.get("booking") && dateInput) dateInput.min = today();
     if (!dialog.open) dialog.showModal();
   } else if ("close" in dataset) {
     control.closest("dialog")?.close();
