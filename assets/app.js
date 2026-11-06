@@ -9,42 +9,40 @@ const bookingDate = new Intl.DateTimeFormat("ru-RU", {
 });
 const cartKey = "yalta-cafe-cart-v1";
 const quantityLimit = 99;
-const products = new Map();
-
-for (const card of document.querySelectorAll("[data-product]")) {
-  const { product: id, name, category, price } = card.dataset;
-  const button = card.querySelector("[data-add]");
-  const photo = card.querySelector("img");
-
-  if (id && name && Number(price) > 0 && Number.isFinite(Number(price))) {
-    products.set(id, {
-      id,
-      name,
-      category,
-      price: Number(price),
-      card,
-      button,
-      buttonCount: button?.querySelector("[data-add-count]"),
-      buttonLabel: button?.getAttribute("aria-label"),
-      photo: photo?.getAttribute("src"),
-    });
-  }
-}
+const catalog = [
+  { id: "syrniki", category: "breakfast", name: "Сырники со сметаной", weight: "180 г", description: "Творожные сырники с ягодным вареньем.", price: 460 },
+  { id: "vareniki", category: "main", name: "Вареники с картофелем", weight: "250 г", description: "Ручная лепка, жареный лук и сметана.", price: 490 },
+  { id: "chicken", category: "main", name: "Котлета по-киевски", weight: "280 г", description: "Куриное филе, сливочное масло и пюре.", price: 690 },
+  { id: "tomatoes", category: "salad", name: "Томаты с душистым маслом", weight: "210 г", description: "Спелые томаты, сладкий лук и зелень.", price: 420 },
+  { id: "honeycake", category: "dessert", name: "Медовик", weight: "140 г", description: "Тонкие медовые коржи и сметанный крем.", price: 390 },
+  { id: "mors", category: "drinks", name: "Ягодный морс", weight: "300 мл", description: "Клюква и чёрная смородина.", price: 230 },
+];
+const products = new Map(catalog.map((item) => [
+  item.id,
+  { ...item, photo: `assets/${item.id}-blue.jpg` },
+]));
 
 const cart = new Map();
-try {
-  const saved = JSON.parse(localStorage.getItem(cartKey) ?? "{}");
-  for (const id of products.keys()) {
-    const quantity = saved?.[id];
-    if (Number.isInteger(quantity) && quantity > 0 && quantity <= quantityLimit) {
-      cart.set(id, quantity);
+function loadCart() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(cartKey) ?? "{}");
+    cart.clear();
+    for (const id of products.keys()) {
+      const quantity = saved?.[id];
+      if (Number.isInteger(quantity) && quantity > 0 && quantity <= quantityLimit) {
+        cart.set(id, quantity);
+      }
     }
+  } catch {
+    // The cart still works in memory when browser storage is unavailable.
   }
-} catch {
-  // The cart still works in memory when browser storage is unavailable.
 }
 
 const filters = [...document.querySelectorAll("[data-filter]")];
+const categoryToggle = document.querySelector("[data-category-toggle]");
+const categoryLabel = document.querySelector("[data-category-label]");
+const menuGrid = document.querySelector("[data-menu-grid]");
+const menuCard = document.querySelector("[data-menu-card]");
 const dialogs = new Map(
   [...document.querySelectorAll("dialog[data-dialog]")].map((dialog) => [
     dialog.dataset.dialog,
@@ -66,15 +64,35 @@ const bookingStatus = document.querySelector("[data-booking-status]");
 const navToggle = document.querySelector("[data-nav-toggle]");
 const mobileNav = document.querySelector("[data-mobile-nav]");
 
+if (menuGrid && menuCard) {
+  const categoryNames = new Map(filters.map((filter) => [filter.dataset.filter, filter.textContent.trim()]));
+  for (const product of products.values()) {
+    const card = menuCard.content.firstElementChild.cloneNode(true);
+    card.dataset.product = product.id;
+    card.querySelector(".dish-photo").src = product.photo;
+    card.querySelector("[data-dish-category]").textContent = categoryNames.get(product.category);
+    card.querySelector("[data-dish-weight]").textContent = product.weight;
+    card.querySelector("[data-dish-name]").textContent = product.name;
+    card.querySelector("[data-dish-description]").textContent = product.description;
+    card.querySelector("[data-dish-price]").textContent = money.format(product.price);
+    product.card = card;
+    product.button = card.querySelector("[data-add]");
+    product.buttonCount = card.querySelector("[data-add-count]");
+    product.buttonLabel = `Добавить в корзину: ${product.name}`;
+    menuGrid.append(card);
+  }
+}
+
 function filterMenu(category) {
   for (const filter of filters) {
     const active = filter.dataset.filter === category;
     filter.classList.toggle("is-active", active);
     filter.setAttribute("aria-pressed", String(active));
+    if (active && categoryLabel) categoryLabel.textContent = filter.textContent.trim();
   }
 
   for (const product of products.values()) {
-    product.card.hidden = category !== "all" && product.category !== category;
+    if (product.card) product.card.hidden = category !== "all" && product.category !== category;
   }
 }
 
@@ -310,7 +328,7 @@ for (const dialog of dialogs.values()) {
 
 document.addEventListener("click", (event) => {
   const control = event.target.closest(
-    "[data-filter], [data-add], [data-open], [data-close], [data-cart-action], [data-checkout], [data-nav-toggle]",
+    "[data-filter], [data-category-toggle], [data-add], [data-open], [data-close], [data-cart-action], [data-checkout], [data-nav-toggle]",
   );
   if (!control) {
     if (event.target.closest("[data-mobile-nav] a")) closeMobileNav();
@@ -320,6 +338,17 @@ document.addEventListener("click", (event) => {
   const { dataset } = control;
   if ("filter" in dataset) {
     filterMenu(dataset.filter);
+    const url = new URL(window.location.href);
+    if (dataset.filter === "all") url.searchParams.delete("category");
+    else url.searchParams.set("category", dataset.filter);
+    if (url.href !== window.location.href) history.replaceState(history.state, "", url);
+    if (categoryToggle?.getAttribute("aria-expanded") === "true") {
+      categoryToggle.setAttribute("aria-expanded", "false");
+      categoryToggle.focus();
+    }
+  } else if ("categoryToggle" in dataset) {
+    const open = control.getAttribute("aria-expanded") === "true";
+    control.setAttribute("aria-expanded", String(!open));
   } else if ("add" in dataset) {
     const id = control.closest("[data-product]")?.dataset.product;
     updateCart(id, (cart.get(id) ?? 0) + 1);
@@ -330,6 +359,7 @@ document.addEventListener("click", (event) => {
     const previousDialog = control.closest("dialog[open]");
     if (previousDialog && previousDialog !== dialog) previousDialog.close();
     closeMobileNav();
+    if (control.closest("[data-mobile-nav]")) navToggle?.focus();
     if (!dialog.open) dialog.showModal();
   } else if ("close" in dataset) {
     control.closest("dialog")?.close();
@@ -349,12 +379,35 @@ document.addEventListener("click", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && navToggle?.getAttribute("aria-expanded") === "true") {
+  if (event.key !== "Escape") return;
+  if (navToggle?.getAttribute("aria-expanded") === "true") {
     closeMobileNav();
     navToggle.focus();
+  } else if (categoryToggle?.getAttribute("aria-expanded") === "true" && !document.querySelector("dialog[open]")) {
+    categoryToggle.setAttribute("aria-expanded", "false");
+    categoryToggle.focus();
   }
 });
 
-const initialFilter = filters.find((filter) => filter.getAttribute("aria-pressed") === "true");
-if (filters.length) filterMenu(initialFilter?.dataset.filter ?? "all");
+if (filters.length) {
+  const requestedCategory = new URLSearchParams(window.location.search).get("category");
+  const initialFilter = filters.find((filter) => filter.dataset.filter === requestedCategory);
+  filterMenu(initialFilter?.dataset.filter ?? "all");
+}
+loadCart();
 renderCart();
+
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) {
+    loadCart();
+    renderCart();
+  }
+});
+
+window.addEventListener("storage", (event) => {
+  if (event.key === cartKey || event.key === null) {
+    loadCart();
+    clearCheckoutStatus();
+    renderCart();
+  }
+});

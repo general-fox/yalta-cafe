@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f2">
+  <meta name="description" content="Меню доставки кафе «Ялта». Завтраки, горячее, салаты, десерты и напитки.">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Меню и доставка — кафе «Ялта»</title>
+  <link rel="icon" href="assets/ya.svg?v=3" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css?v=3">
+  <script src="assets/site-shell.js?v=3" defer></script>
+  <script src="assets/app.js?v=3" defer></script>
+</head>
+<body data-page="menu">
+  <div data-site-header></div>
+  <main class="menu-page" id="main">
+    <div class="frame">
+      <header class="menu-page-heading">
+        <p class="eyebrow">Доставка</p>
+        <h1 class="section-title" id="menu-title">Меню «Ялты»</h1>
+        <p>Домашние блюда к завтраку, обеду и ужину. Соберите заказ на свой вкус.</p>
+      </header>
+      <div class="menu-page-layout">
+        <aside class="menu-sidebar">
+          <nav class="menu-sidebar-inner" aria-label="Категории блюд">
+            <p class="eyebrow menu-category-title">Категории</p>
+            <button type="button" class="menu-category-toggle" data-category-toggle aria-expanded="false" aria-controls="menu-categories">
+              <span data-category-label>Всё меню</span>
+              <svg class="icon" aria-hidden="true"><use href="#chevron"/></svg>
+            </button>
+            <div class="menu-category-list" id="menu-categories">
+              <button type="button" class="menu-category is-active" data-filter="all" aria-pressed="true">Всё меню</button>
+              <button type="button" class="menu-category" data-filter="breakfast" aria-pressed="false">Завтраки</button>
+              <button type="button" class="menu-category" data-filter="main" aria-pressed="false">Горячее</button>
+              <button type="button" class="menu-category" data-filter="salad" aria-pressed="false">Салаты</button>
+              <button type="button" class="menu-category" data-filter="dessert" aria-pressed="false">Десерты</button>
+              <button type="button" class="menu-category" data-filter="drinks" aria-pressed="false">Напитки</button>
+            </div>
+          </nav>
+        </aside>
+        <section class="menu-page-content" aria-label="Блюда">
+          <div class="menu-grid" data-menu-grid></div>
+          <noscript><p>Включите JavaScript, чтобы открыть меню и корзину.</p></noscript>
+          <div class="menu-foot">
+            <p>Блюда, цены и фотографии приведены для примера.</p>
+            <button type="button" class="text-button" data-open="cart" aria-haspopup="dialog">Посмотреть корзину <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+  <div data-site-footer></div>
+
+  <template data-menu-card>
+    <article class="dish" data-product>
+      <img class="dish-photo" width="508" height="508" alt="" loading="lazy">
+      <div class="dish-info">
+        <p class="dish-meta"><span data-dish-category></span><span data-dish-weight></span></p>
+        <h3 data-dish-name></h3>
+        <p class="dish-description" data-dish-description></p>
+        <div class="dish-order">
+          <strong data-dish-price></strong>
+          <button type="button" class="dish-add" data-add>
+            <span class="dish-add-copy">В корзину</span>
+            <span class="dish-add-count" data-add-count hidden></span>
+            <svg class="icon" aria-hidden="true"><use href="#plus"/></svg>
+          </button>
+        </div>
+      </div>
+    </article>
+  </template>
+</body>
+</html>

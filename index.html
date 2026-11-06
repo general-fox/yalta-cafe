@@ -3,222 +3,108 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#faf9f6">
+  <meta name="theme-color" content="#f7f7f2">
   <meta name="description" content="Кафе «Ялта». Домашняя кухня, доставка и столик для встречи.">
   <meta name="robots" content="noindex, nofollow">
   <title>Кафе «Ялта» — домашняя кухня</title>
-  <link rel="icon" href="assets/ya.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/style.css?v=2">
-  <script src="assets/app.js?v=2" defer></script>
+  <link rel="icon" href="assets/ya.svg?v=3" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css?v=3">
+  <script src="assets/site-shell.js?v=3" defer></script>
+  <script src="assets/app.js?v=3" defer></script>
 </head>
-<body id="top">
-  <a class="skip-link" href="#main">К содержанию</a>
-  <svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <symbol id="arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
-    <symbol id="arrow-up" viewBox="0 0 24 24"><path d="M6 18 18 6M7 6h11v11"/></symbol>
-    <symbol id="bag" viewBox="0 0 24 24"><path d="M5 8h14l1 12H4L5 8Zm4 1V6a3 3 0 1 1 6 0v3"/></symbol>
-    <symbol id="plus" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></symbol>
-    <symbol id="close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
-    <symbol id="menu-icon" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></symbol>
-  </svg>
-
-  <header class="site-header">
-    <div class="frame header-inner">
-      <a class="brand" href="#top" aria-label="Кафе «Ялта», на главную">
-        <img src="assets/yalta.svg" width="114" height="36" alt="Ялта">
-      </a>
-      <nav class="desktop-nav" aria-label="Основная навигация">
-        <a href="#delivery">Доставка</a>
-        <a href="#booking">Бронирование</a>
-        <a href="#offers">Акции</a>
-      </nav>
-      <div class="header-actions">
-        <button type="button" class="cart-trigger" data-open="cart" aria-label="Открыть корзину">
-          <svg class="icon" aria-hidden="true"><use href="#bag"/></svg><span class="cart-label">Корзина</span><span class="cart-badge" data-cart-count>0</span>
-        </button>
-        <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Открыть меню">
-          <svg class="icon" aria-hidden="true"><use href="#menu-icon"/></svg>
-        </button>
-      </div>
-      <nav class="mobile-nav" id="mobile-nav" aria-label="Навигация на телефоне" data-mobile-nav hidden>
-        <a href="#delivery">Доставка</a><a href="#booking">Бронирование</a><a href="#offers">Акции</a><a href="#loyalty">Лояльность</a>
-      </nav>
-    </div>
-  </header>
-
+<body data-page="home">
+  <div data-site-header></div>
   <main id="main">
-    <section class="frame hero" aria-labelledby="hero-title">
-      <div class="hero-story">
-        <p class="eyebrow hero-kicker"><img src="assets/wave1.svg" width="27" height="20" alt=""> Кафе домашней кухни</p>
-        <div class="hero-copy">
-          <h1 id="hero-title">Дома,<br><em>как в «Ялте»</em></h1>
-          <p>Вареники ручной лепки, румяные сырники и другие любимые блюда с доставкой к вашему столу.</p>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="frame hero-inner">
+        <div class="hero-edition"><span>Кафе «Ялта»</span><span>Демо для согласования</span></div>
+        <div class="hero-art">
+          <img class="hero-plate" src="assets/hero-plate.webp" width="904" height="819" alt="Вареники со сметаной на белой тарелке с синим ободком" fetchpriority="high">
         </div>
+        <h1 id="hero-title">Домашняя кухня</h1>
+        <p class="hero-description">Вареники ручной лепки, румяные сырники<br class="desktop-break"> и столик для тёплых встреч.</p>
         <div class="hero-actions">
-          <a class="button button-blue" href="#delivery">Выбрать блюда <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
-          <a class="text-button" href="#booking">Столик в кафе <svg class="icon" aria-hidden="true"><use href="#arrow-up"/></svg></a>
+          <a class="button button-paper" href="menu.html">Меню и доставка <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+          <button type="button" class="button button-ghost" data-open="booking" aria-haspopup="dialog">Забронировать <svg class="icon" aria-hidden="true"><use href="#arrow-up"/></svg></button>
         </div>
       </div>
-      <figure class="hero-photo">
-        <img src="assets/hero.jpg" alt="Поджаренные вареники со сметаной и укропом на столе с синей полосатой скатертью" width="1536" height="1024" fetchpriority="high">
-      </figure>
-      <div class="hero-caption"><span>Домашняя кухня · Доставка</span><span>Демо для согласования</span></div>
     </section>
 
-    <section class="frame menu-section" id="delivery" aria-labelledby="delivery-title">
-      <div class="section-heading">
-        <div><p class="eyebrow section-index">Доставка из «Ялты»</p><h2 id="delivery-title">Меню на дом</h2></div>
-        <p class="section-note">Выберите блюда на обед или ужин. Меню и цены приведены для примера.</p>
+    <section class="frame home-about" id="booking" aria-labelledby="about-title">
+      <div class="about-copy">
+        <p class="eyebrow">О кафе</p>
+        <h2 class="section-title" id="about-title">Встретимся<br> за столом</h2>
+        <p>В «Ялте» готовим знакомые с детства блюда. Заглядывайте на завтрак, собирайтесь на обед с близкими или заказывайте ужин домой.</p>
+        <button type="button" class="text-button" data-open="booking" aria-haspopup="dialog">Забронировать столик <svg class="icon" aria-hidden="true"><use href="#arrow-up"/></svg></button>
       </div>
-      <div class="menu-filters" aria-label="Категории меню" role="group">
-        <button type="button" class="is-active" data-filter="all" aria-pressed="true">Всё меню</button>
-        <button type="button" data-filter="breakfast" aria-pressed="false">Завтраки</button>
-        <button type="button" data-filter="main" aria-pressed="false">Горячее</button>
-        <button type="button" data-filter="salad" aria-pressed="false">Салаты</button>
-        <button type="button" data-filter="dessert" aria-pressed="false">Десерты</button>
-        <button type="button" data-filter="drinks" aria-pressed="false">Напитки</button>
-      </div>
-      <div class="menu-grid">
-        <article class="dish" data-product="syrniki" data-category="breakfast" data-name="Сырники со сметаной" data-price="460">
-          <img class="dish-photo" src="assets/syrniki.jpg" alt="Сырники с ягодным вареньем и сметаной" width="512" height="400" loading="lazy">
-          <div class="dish-info">
-            <p class="dish-meta">180 г</p><h3>Сырники со сметаной</h3>
-            <p class="dish-description">Творожные сырники с ягодным вареньем.</p>
-            <div class="dish-order"><strong>460 ₽</strong><button type="button" class="dish-add" data-add aria-label="Добавить сырники в корзину"><span class="dish-add-copy">В корзину</span><span class="dish-add-count" data-add-count hidden></span><svg class="icon" aria-hidden="true"><use href="#plus"/></svg></button></div>
-          </div>
-        </article>
-        <article class="dish" data-product="vareniki" data-category="main" data-name="Вареники с картофелем" data-price="490">
-          <img class="dish-photo" src="assets/vareniki.jpg" alt="Вареники с картофелем и укропом" width="512" height="400" loading="lazy">
-          <div class="dish-info">
-            <p class="dish-meta">250 г</p><h3>Вареники с картофелем</h3>
-            <p class="dish-description">Ручная лепка, жареный лук и сметана.</p>
-            <div class="dish-order"><strong>490 ₽</strong><button type="button" class="dish-add" data-add aria-label="Добавить вареники в корзину"><span class="dish-add-copy">В корзину</span><span class="dish-add-count" data-add-count hidden></span><svg class="icon" aria-hidden="true"><use href="#plus"/></svg></button></div>
-          </div>
-        </article>
-        <article class="dish" data-product="chicken" data-category="main" data-name="Котлета по-киевски" data-price="690">
-          <img class="dish-photo" src="assets/chicken.jpg" alt="Котлета по-киевски с картофельным пюре" width="512" height="400" loading="lazy">
-          <div class="dish-info">
-            <p class="dish-meta">280 г</p><h3>Котлета по-киевски</h3>
-            <p class="dish-description">Куриное филе, сливочное масло и пюре.</p>
-            <div class="dish-order"><strong>690 ₽</strong><button type="button" class="dish-add" data-add aria-label="Добавить котлету в корзину"><span class="dish-add-copy">В корзину</span><span class="dish-add-count" data-add-count hidden></span><svg class="icon" aria-hidden="true"><use href="#plus"/></svg></button></div>
-          </div>
-        </article>
-        <article class="dish" data-product="tomatoes" data-category="salad" data-name="Томаты с душистым маслом" data-price="420">
-          <img class="dish-photo" src="assets/tomatoes.jpg" alt="Салат из томатов со сладким луком" width="512" height="400" loading="lazy">
-          <div class="dish-info">
-            <p class="dish-meta">210 г</p><h3>Томаты с душистым маслом</h3>
-            <p class="dish-description">Спелые томаты, сладкий лук и зелень.</p>
-            <div class="dish-order"><strong>420 ₽</strong><button type="button" class="dish-add" data-add aria-label="Добавить салат из томатов в корзину"><span class="dish-add-copy">В корзину</span><span class="dish-add-count" data-add-count hidden></span><svg class="icon" aria-hidden="true"><use href="#plus"/></svg></button></div>
-          </div>
-        </article>
-        <article class="dish" data-product="honeycake" data-category="dessert" data-name="Медовик" data-price="390">
-          <img class="dish-photo" src="assets/honeycake.jpg" alt="Ломтик многослойного медовика" width="512" height="400" loading="lazy">
-          <div class="dish-info">
-            <p class="dish-meta">140 г</p><h3>Медовик</h3>
-            <p class="dish-description">Тонкие медовые коржи и сметанный крем.</p>
-            <div class="dish-order"><strong>390 ₽</strong><button type="button" class="dish-add" data-add aria-label="Добавить медовик в корзину"><span class="dish-add-copy">В корзину</span><span class="dish-add-count" data-add-count hidden></span><svg class="icon" aria-hidden="true"><use href="#plus"/></svg></button></div>
-          </div>
-        </article>
-        <article class="dish" data-product="mors" data-category="drinks" data-name="Ягодный морс" data-price="230">
-          <img class="dish-photo" src="assets/mors.jpg" alt="Стакан ягодного морса" width="512" height="400" loading="lazy">
-          <div class="dish-info">
-            <p class="dish-meta">300 мл</p><h3>Ягодный морс</h3>
-            <p class="dish-description">Клюква и чёрная смородина.</p>
-            <div class="dish-order"><strong>230 ₽</strong><button type="button" class="dish-add" data-add aria-label="Добавить морс в корзину"><span class="dish-add-copy">В корзину</span><span class="dish-add-count" data-add-count hidden></span><svg class="icon" aria-hidden="true"><use href="#plus"/></svg></button></div>
-          </div>
-        </article>
-      </div>
-      <div class="menu-foot"><span>Фото блюд — иллюстрации для демо.</span><button class="text-button" type="button" data-open="cart">Посмотреть корзину <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></button></div>
-    </section>
-
-    <section class="frame booking-section" id="booking" aria-labelledby="booking-title">
-      <div class="booking-story">
-        <p class="eyebrow section-index">Бронирование</p>
-        <h2 id="booking-title">Столик в&nbsp;«Ялте»</h2>
-        <p class="booking-intro">Выберите дату, время и число гостей.</p>
-        <form class="booking-form" data-booking-form aria-describedby="booking-note">
-          <label>Дата <input type="date" name="date" required></label>
-          <label>Гостей <select name="guests" required><option value="1">1 гость</option><option value="2" selected>2 гостя</option><option value="3">3 гостя</option><option value="4">4 гостя</option><option value="5">5 гостей</option><option value="6">6 гостей</option><option value="7">7 гостей</option><option value="8">8 гостей</option></select></label>
-          <label class="booking-time">Время <select name="time" required>
-            <option value="">Выбрать время</option><option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option><option>14:00</option><option>14:30</option><option>15:00</option><option>15:30</option><option>16:00</option><option>16:30</option><option>17:00</option><option>17:30</option><option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option><option>20:00</option><option>20:30</option><option>21:00</option><option>21:30</option>
-          </select></label>
-          <button type="submit" class="button button-blue booking-submit">Проверить бронь <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></button>
-        </form>
-        <p class="booking-note" id="booking-note">Демо. Время приведено для примера.</p>
-        <p class="panel-status" data-booking-status role="status" aria-atomic="true"></p>
-      </div>
-      <figure class="booking-photo">
-        <img src="assets/interior.jpg" width="1536" height="1024" loading="lazy" alt="Визуализация зала кафе со светлыми скатертями и синей обивкой">
+      <figure class="about-photo">
+        <img src="assets/room-blue.jpg" width="1536" height="1024" alt="Визуализация кафе с синей банкеткой, светлыми стенами и накрытыми столами" loading="lazy">
         <figcaption>Визуализация интерьера</figcaption>
       </figure>
+      <figure class="about-detail">
+        <img src="assets/syrniki-blue.jpg" width="508" height="508" alt="Сырники со сметаной на фарфоровой тарелке" loading="lazy">
+      </figure>
     </section>
 
-    <section class="frame offers-section" id="offers" aria-labelledby="offers-title">
-      <div class="section-heading">
-        <div><p class="eyebrow section-index">Акции</p><h2 id="offers-title">Особый повод</h2></div>
-        <p class="section-note">Примеры предложений для доставки и ужина в кафе.</p>
+    <section class="frame home-menu" id="delivery" aria-labelledby="menu-preview-title">
+      <div class="home-menu-copy">
+        <p class="eyebrow">С доставкой домой</p>
+        <h2 class="section-title" id="menu-preview-title">Меню «Ялты»</h2>
+        <p>От сырников к завтраку до горячего на семейный ужин.</p>
+        <a class="button button-paper" href="menu.html">Открыть всё меню <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
       </div>
+      <nav class="home-menu-links" aria-label="Разделы меню">
+        <a href="menu.html?category=breakfast"><img src="assets/syrniki-blue.jpg" width="508" height="508" alt="" loading="lazy"><span>Завтраки</span><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+        <a href="menu.html?category=main"><img src="assets/vareniki-blue.jpg" width="508" height="508" alt="" loading="lazy"><span>Горячее</span><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+        <a href="menu.html?category=dessert"><img src="assets/honeycake-blue.jpg" width="508" height="508" alt="" loading="lazy"><span>Десерты</span><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+      </nav>
+    </section>
+
+    <section class="frame home-offers" id="offers" aria-labelledby="offers-title">
+      <div class="section-heading"><div><p class="eyebrow">Акции</p><h2 class="section-title" id="offers-title">Повод заглянуть</h2></div><p>Примеры предложений для кафе и доставки.</p></div>
       <div class="offer-grid">
         <article class="offer offer-delivery">
-          <div class="offer-copy"><p class="eyebrow">Для доставки</p><h3>Первый заказ</h3><p>Пример скидки 10% на знакомство с «Ялтой».</p><button type="button" class="text-button" data-open="offer-1">Об акции <svg class="icon" aria-hidden="true"><use href="#arrow-up"/></svg></button></div>
+          <p class="eyebrow">Для доставки</p><h3>Первый заказ</h3><p>Пример скидки 10% на знакомство с «Ялтой».</p>
+          <button class="text-button" type="button" data-open="offer-1" aria-haspopup="dialog">Об акции <svg class="icon" aria-hidden="true"><use href="#arrow-up"/></svg></button>
           <span class="offer-number" aria-hidden="true">10%</span>
         </article>
         <article class="offer offer-visit">
-          <div class="offer-copy"><p class="eyebrow">В кафе</p><h3>День рождения</h3><p>Пример комплимента к праздничному столу.</p><button type="button" class="text-button" data-open="offer-2">Об акции <svg class="icon" aria-hidden="true"><use href="#arrow-up"/></svg></button></div>
-          <img class="offer-photo" src="assets/table.jpg" width="900" height="600" loading="lazy" alt="Медовик на накрытом столе в кафе">
+          <p class="eyebrow">В кафе</p><h3>День рождения</h3><p>Идея для акции — десерт к праздничному столу.</p>
+          <button class="text-button" type="button" data-open="offer-2" aria-haspopup="dialog">Об акции <svg class="icon" aria-hidden="true"><use href="#arrow-up"/></svg></button>
+          <img class="offer-emblem" src="assets/ya.svg?v=3" width="160" height="126" alt="" loading="lazy">
         </article>
       </div>
     </section>
 
-    <section class="frame loyalty-section" id="loyalty" aria-labelledby="loyalty-title">
-      <img src="assets/wave2.svg" width="49" height="47" alt="">
-      <div><p class="eyebrow">Программа лояльности</p><h2 id="loyalty-title">Для тех, кто возвращается</h2><p>Бонусы за заказы и визиты — после запуска программы.</p></div>
-      <button class="button button-line" type="button" data-open="loyalty">О программе <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></button>
+    <section class="frame home-loyalty" id="loyalty" aria-labelledby="home-loyalty-title">
+      <div class="home-loyalty-mark"><img src="assets/wave2.svg?v=3" width="58" height="56" alt=""></div>
+      <div><p class="eyebrow">Для постоянных гостей</p><h2 id="home-loyalty-title">Карта гостя «Ялты»</h2><p>Как добавить карту в телефон и показать её в кафе.</p></div>
+      <a class="button button-line" href="loyalty.html">Как добавить карту <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+    </section>
+
+    <section class="frame visit-section" id="contacts" aria-labelledby="visit-title">
+      <div><p class="eyebrow">Контакты</p><h2 class="section-title" id="visit-title">Адрес и часы работы</h2></div>
+      <dl class="visit-details">
+        <div><dt>Адрес кафе</dt><dd>Примерная улица, 12</dd></div>
+        <div><dt>Зал</dt><dd>Ежедневно, 11:00–23:00</dd></div>
+        <div><dt>Доставка</dt><dd>Ежедневно, 11:00–22:00</dd></div>
+      </dl>
+      <p class="visit-note">Адрес и часы работы указаны для примера.</p>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="frame footer-inner">
-      <a class="footer-brand" href="#top" aria-label="Кафе «Ялта», в начало"><img src="assets/yalta.svg" width="132" height="42" alt="Ялта"></a>
-      <p>Кафе домашней кухни</p>
-      <nav aria-label="Навигация внизу страницы"><a href="#delivery">Доставка</a><a href="#booking">Столик</a><a href="#offers">Акции</a><a href="#loyalty">Лояльность</a></nav>
-      <small>Демо для согласования</small>
-    </div>
-  </footer>
-
-  <dialog class="panel cart-panel" data-dialog="cart" aria-labelledby="cart-title">
-    <div class="panel-top"><div><p class="eyebrow">Доставка</p><h2 id="cart-title">Корзина</h2></div><button type="button" class="panel-close" data-close aria-label="Закрыть корзину"><svg class="icon" aria-hidden="true"><use href="#close"/></svg></button></div>
-    <div class="cart-empty" data-cart-empty><p>Корзина пока пуста.</p><a href="#delivery" class="text-button" data-close>Перейти в меню <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a></div>
-    <ul class="cart-items" data-cart-items></ul>
-    <div class="cart-total"><span>Итого</span><strong data-cart-total>0 ₽</strong></div>
-    <button class="button button-blue panel-action" type="button" data-checkout aria-controls="demo-checkout" aria-expanded="false" disabled>К оформлению <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></button>
-    <p class="panel-note">Демонстрационная корзина</p>
-    <form class="checkout-form" id="demo-checkout" data-checkout-form autocomplete="off" hidden>
-      <p class="panel-note">Для проверки используйте вымышленные адрес и телефон.</p>
-      <label>Адрес доставки <input type="text" name="address" placeholder="Примерная улица, 7" maxlength="160" required></label>
-      <label>Телефон <input type="tel" name="phone" placeholder="+7 (000) 000-00-00" maxlength="24" required></label>
-      <button class="button button-blue panel-action" type="submit">Проверить демозаказ <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></button>
-    </form>
-    <p class="panel-status" data-checkout-status role="status"></p>
-  </dialog>
+  <div data-site-footer></div>
 
   <dialog class="panel" data-dialog="offer-1" aria-labelledby="offer-one-title">
     <div class="panel-top"><div><p class="eyebrow">Пример акции</p><h2 id="offer-one-title">Первый заказ</h2></div><button type="button" class="panel-close" data-close aria-label="Закрыть предложение"><svg class="icon" aria-hidden="true"><use href="#close"/></svg></button></div>
-    <p class="panel-description">В этой версии показываем, как может выглядеть предложение со скидкой 10% на первую доставку. Условия акции появятся после согласования.</p>
-    <a class="button button-blue panel-action" href="#delivery" data-close>Посмотреть меню <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+    <p class="panel-description">Вариант предложения для первой доставки со скидкой 10%. Условия появятся после согласования.</p>
+    <a class="button button-blue panel-action" href="menu.html" data-close>Посмотреть меню <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
   </dialog>
 
   <dialog class="panel" data-dialog="offer-2" aria-labelledby="offer-two-title">
     <div class="panel-top"><div><p class="eyebrow">Пример акции</p><h2 id="offer-two-title">День рождения</h2></div><button type="button" class="panel-close" data-close aria-label="Закрыть предложение"><svg class="icon" aria-hidden="true"><use href="#close"/></svg></button></div>
-    <p class="panel-description">Идея для акции в кафе — десерт к столу в день рождения. Условия акции появятся после согласования.</p>
-    <a class="button button-blue panel-action" href="#booking" data-close>К бронированию <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+    <p class="panel-description">Идея для акции в кафе — десерт к столу в день рождения. Условия появятся после согласования.</p>
+    <button type="button" class="button button-blue panel-action" data-open="booking" aria-haspopup="dialog">Забронировать столик <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></button>
   </dialog>
-
-  <dialog class="panel" data-dialog="loyalty" aria-labelledby="loyalty-panel-title">
-    <div class="panel-top"><div><p class="eyebrow">Лояльность</p><h2 id="loyalty-panel-title">Для постоянных гостей</h2></div><button type="button" class="panel-close" data-close aria-label="Закрыть информацию о лояльности"><svg class="icon" aria-hidden="true"><use href="#close"/></svg></button></div>
-    <p class="panel-description">Здесь появятся правила начисления и списания бонусов. Участие в программе станет доступно после запуска.</p>
-  </dialog>
-
-  <p class="visually-hidden" data-announcement role="status" aria-atomic="true"></p>
 </body>
 </html>

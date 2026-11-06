@@ -10,26 +10,15 @@
         fill: none;
       }
 
-      .cls-3 {
-        filter: url(#drop-shadow-1);
-      }
-
       .cls-4 {
         clip-path: url(#clippath);
       }
     </style>
-    <filter id="drop-shadow-1" x="-123.16" y="5.35" width="435.01" height="87.63" filterUnits="userSpaceOnUse">
-      <feOffset dx="7" dy="7"/>
-      <feGaussianBlur result="blur" stdDeviation="5"/>
-      <feFlood flood-color="#000" flood-opacity=".4"/>
-      <feComposite in2="blur" operator="in"/>
-      <feComposite in="SourceGraphic"/>
-    </filter>
     <clipPath id="clippath">
       <rect class="cls-2" x="-102.01" y="13.44" width="86.68" height="73.56"/>
     </clipPath>
   </defs>
-  <g class="cls-3">
+  <g>
     <g>
       <g>
         <polygon class="cls-1" points="109.51 28.96 109.51 28.88 109.51 28.8 109.51 28.88 109.51 28.96 109.51 29.03 109.51 28.96"/>
