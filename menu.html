@@ -3,23 +3,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
   <meta name="theme-color" content="#f7f7f2">
   <meta name="description" content="Меню доставки кафе «Ялта». Завтраки, горячее, салаты, десерты и напитки.">
   <meta name="robots" content="noindex, nofollow">
   <title>Меню и доставка — кафе «Ялта»</title>
   <link rel="icon" href="assets/ya.svg?v=3" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/style.css?v=6">
-  <script src="assets/site-shell.js?v=5" defer></script>
-  <script src="assets/app.js?v=3" defer></script>
+  <link rel="stylesheet" href="assets/style.css?v=7">
+  <script src="assets/site-shell.js?v=7" defer></script>
+  <script src="assets/app.js?v=7" defer></script>
 </head>
 <body data-page="menu">
   <div data-site-header></div>
   <main class="menu-page" id="main">
     <div class="frame">
       <header class="menu-page-heading">
-        <p class="eyebrow">Доставка</p>
-        <h1 class="section-title" id="menu-title">Меню <em>«Ялты»</em></h1>
-        <p>Домашние блюда к завтраку, обеду и ужину. Соберите заказ на свой вкус.</p>
+        <div class="menu-page-intro">
+          <p class="eyebrow">Доставка</p>
+          <h1 class="section-title" id="menu-title">Меню <em>«Ялты»</em></h1>
+          <p>Домашние блюда к завтраку, обеду и ужину. Соберите заказ на свой вкус.</p>
+        </div>
+        <div class="menu-delivery-hours">
+          <dl>
+            <dt class="eyebrow">Часы доставки</dt>
+            <dd>Ежедневно, <span><time datetime="11:00">11:00</time>–<time datetime="22:00">22:00</time></span></dd>
+          </dl>
+          <small>Пример графика</small>
+        </div>
       </header>
       <div class="menu-page-layout">
         <aside class="menu-sidebar">
@@ -44,7 +54,6 @@
           <noscript><p>Включите JavaScript, чтобы открыть меню и корзину.</p></noscript>
           <div class="menu-foot">
             <p>Блюда, цены и фотографии приведены для примера.</p>
-            <button type="button" class="text-button" data-open="cart" aria-haspopup="dialog">Посмотреть корзину <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></button>
           </div>
         </section>
       </div>

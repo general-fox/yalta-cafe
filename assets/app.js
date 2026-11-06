@@ -50,6 +50,7 @@ const dialogs = new Map(
   ]),
 );
 const cartDialog = dialogs.get("cart");
+const bookingDialog = dialogs.get("booking");
 const cartItems = cartDialog?.querySelector("[data-cart-items]");
 const cartEmpty = cartDialog?.querySelector("[data-cart-empty]");
 const cartTotal = cartDialog?.querySelector("[data-cart-total]");
@@ -253,9 +254,18 @@ function dateValue(date) {
   return `${date.getFullYear()}-${month}-${day}`;
 }
 
+function validPhoneNumber(value) {
+  const phone = value.trim();
+  const digits = phone.replace(/\D/g, "");
+  return /^\+?[\d\s().-]+$/.test(phone) && digits.length >= 10 && digits.length <= 15;
+}
+
+const bookingName = bookingForm?.querySelector('input[name="firstName"]');
+const bookingPhone = bookingForm?.querySelector('input[name="phone"]');
 const dateInput = bookingForm?.querySelector('input[name="date"]');
 const bookingTime = bookingForm?.querySelector('[name="time"]');
-if (dateInput) {
+function prepareBookingDate() {
+  if (!dateInput) return;
   const nextDay = new Date();
   dateInput.min = dateValue(nextDay);
   if (!dateInput.value) {
@@ -264,6 +274,7 @@ if (dateInput) {
   }
 }
 
+prepareBookingDate();
 cartDialog?.addEventListener("close", closeCheckout);
 
 checkoutForm?.addEventListener("input", (event) => {
@@ -275,18 +286,23 @@ checkoutForm?.addEventListener("submit", (event) => {
   event.preventDefault();
   if (cart.size === 0 || !checkoutStatus || !deliveryAddress || !deliveryPhone) return;
 
-  const phone = deliveryPhone.value.trim();
-  const digits = phone.replace(/\D/g, "");
-  const validPhone = /^\+?[\d\s().-]+$/.test(phone) && digits.length >= 10 && digits.length <= 15;
   deliveryAddress.setCustomValidity(deliveryAddress.value.trim() ? "" : "Введите адрес доставки.");
-  deliveryPhone.setCustomValidity(validPhone ? "" : "Введите телефон с 10–15 цифрами.");
+  deliveryPhone.setCustomValidity(validPhoneNumber(deliveryPhone.value) ? "" : "Введите телефон с 10–15 цифрами.");
   if (!checkoutForm.reportValidity()) return;
 
   const total = renderCart();
   checkoutStatus.textContent = `Пример заказа на ${money.format(total)}. Отправка заказов появится после подключения доставки.`;
 });
 
-bookingForm?.addEventListener("input", () => {
+bookingDialog?.addEventListener("close", () => {
+  bookingForm?.reset();
+  for (const field of [bookingName, bookingPhone, bookingTime]) field?.setCustomValidity("");
+  if (bookingStatus) bookingStatus.textContent = "";
+  prepareBookingDate();
+});
+
+bookingForm?.addEventListener("input", (event) => {
+  event.target.setCustomValidity?.("");
   bookingTime?.setCustomValidity("");
   if (bookingStatus) bookingStatus.textContent = "";
 });
@@ -295,6 +311,8 @@ bookingForm?.addEventListener("submit", (event) => {
   event.preventDefault();
   const now = new Date();
   if (dateInput) dateInput.min = dateValue(now);
+  if (bookingName) bookingName.setCustomValidity(bookingName.value.trim() ? "" : "Введите имя.");
+  if (bookingPhone) bookingPhone.setCustomValidity(validPhoneNumber(bookingPhone.value) ? "" : "Введите телефон с 10–15 цифрами.");
   if (!bookingForm.reportValidity() || !bookingStatus) return;
 
   const data = new FormData(bookingForm);
@@ -311,6 +329,7 @@ bookingForm?.addEventListener("submit", (event) => {
   const guestCount = new Intl.PluralRules("ru-RU").select(Number(guests));
   const guestLabel = { one: "гость", few: "гостя", many: "гостей" }[guestCount] ?? "гостя";
   bookingStatus.textContent = `Демобронь · ${bookingDate.format(visit)} в ${time} · ${guests} ${guestLabel}.`;
+  bookingStatus.scrollIntoView({ block: "nearest" });
 });
 
 for (const dialog of dialogs.values()) {

@@ -9,8 +9,6 @@
     <a href="menu.html"${current("menu")}>Меню и доставка</a>
     <a href="loyalty.html"${current("loyalty")}>Карта гостя</a>
     <a href="index.html#contacts">Контакты</a>`;
-  const booking = `<button type="button" class="nav-booking" data-open="booking" aria-haspopup="dialog"><span class="nav-booking-full">Забронировать</span><span class="nav-booking-short">Бронь</span></button>`;
-
   header.innerHTML = `
     <a class="skip-link" href="#main">К содержанию</a>
     <svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -27,30 +25,31 @@
         <a class="brand" href="index.html" aria-label="Кафе «Ялта», главная"><img src="assets/yalta.svg?v=3" width="116" height="36" alt="Ялта"></a>
         <nav class="desktop-nav" aria-label="Основная навигация">${links}</nav>
         <div class="header-actions">
-          ${booking}
+          <span class="header-phone" title="Временный номер кафе">+7 000 000-00-00</span>
           <button type="button" class="cart-trigger" data-open="cart" aria-haspopup="dialog" aria-label="Открыть корзину">${icon("bag")}<span class="cart-badge" data-cart-count>0</span></button>
           <button type="button" class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Навигация">${icon("menu-icon")}</button>
         </div>
-        <nav class="mobile-nav" id="mobile-nav" aria-label="Навигация на телефоне" data-mobile-nav hidden>${links}${booking}</nav>
+        <nav class="mobile-nav" id="mobile-nav" aria-label="Навигация на телефоне" data-mobile-nav hidden>${links}</nav>
       </div>
-    </header>`;
+    </header>
+    <div class="booking-dock"><button type="button" class="booking-float" data-open="booking" aria-haspopup="dialog" aria-controls="booking-dialog">Забронировать стол ${icon("arrow-up")}</button></div>`;
 
   footer.innerHTML = `
     <footer class="site-footer">
       <div class="frame footer-inner">
         <a class="footer-brand" href="index.html" aria-label="Кафе «Ялта», главная"><img src="assets/yalta.svg?v=3" width="132" height="42" alt="Ялта"></a>
         <p>Кафе домашней кухни</p>
-        <nav aria-label="Навигация внизу страницы">${links}${booking}</nav>
+        <nav aria-label="Навигация внизу страницы">${links}</nav>
       </div>
     </footer>
-    <dialog class="panel cart-panel" data-dialog="cart" aria-labelledby="cart-title">
+    <dialog class="panel cart-modal" data-dialog="cart" aria-labelledby="cart-title">
       <div class="panel-top"><div><p class="eyebrow">Доставка</p><h2 id="cart-title">Корзина</h2></div><button type="button" class="panel-close" data-close aria-label="Закрыть корзину">${icon("close")}</button></div>
       <div class="cart-empty" data-cart-empty><p>Корзина пока пуста.</p><a href="menu.html" class="text-button" data-close>Перейти в меню ${icon("arrow")}</a></div>
       <ul class="cart-items" data-cart-items></ul>
       <div class="cart-total"><span>Итого</span><strong data-cart-total>0 ₽</strong></div>
       <button class="button button-blue panel-action" type="button" data-checkout aria-controls="demo-checkout" aria-expanded="false" disabled>К оформлению ${icon("arrow")}</button>
       <p class="panel-note">Демонстрационная корзина</p>
-      <form class="checkout-form" id="demo-checkout" data-checkout-form autocomplete="off" hidden>
+      <form class="checkout-form" id="demo-checkout" method="dialog" data-checkout-form autocomplete="off" hidden>
         <p class="panel-note">Для проверки используйте вымышленные адрес и телефон.</p>
         <label>Адрес доставки <input type="text" name="address" placeholder="Примерная улица, 7" maxlength="160" required></label>
         <label>Телефон <input type="tel" name="phone" placeholder="+7 (000) 000-00-00" maxlength="24" required></label>
@@ -58,20 +57,25 @@
       </form>
       <p class="panel-status" data-checkout-status role="status"></p>
     </dialog>
-    <dialog class="panel booking-panel" data-dialog="booking" aria-labelledby="booking-title">
-      <div class="panel-top"><div><p class="eyebrow">Кафе «Ялта»</p><h2 id="booking-title">Забронировать столик</h2></div><button type="button" class="panel-close" data-close aria-label="Закрыть бронирование">${icon("close")}</button></div>
-      <p class="panel-description">Выберите дату, время и число гостей.</p>
-      <form class="booking-form" data-booking-form aria-describedby="booking-note">
-        <label>Дата <input type="date" name="date" required></label>
-        <label>Гостей <select name="guests" required>
-          <option value="1">1 гость</option><option value="2" selected>2 гостя</option><option value="3">3 гостя</option><option value="4">4 гостя</option><option value="5">5 гостей</option><option value="6">6 гостей</option><option value="7">7 гостей</option><option value="8">8 гостей</option>
-        </select></label>
-        <label class="booking-time">Время <select name="time" required>
-          <option value="">Выбрать время</option><option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option><option>14:00</option><option>14:30</option><option>15:00</option><option>15:30</option><option>16:00</option><option>16:30</option><option>17:00</option><option>17:30</option><option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option><option>20:00</option><option>20:30</option><option>21:00</option><option>21:30</option>
-        </select></label>
+    <dialog class="panel booking-panel" id="booking-dialog" data-dialog="booking" aria-labelledby="booking-title">
+      <div class="panel-top"><div><p class="eyebrow">Кафе «Ялта»</p><h2 id="booking-title">Забронировать стол</h2></div><button type="button" class="panel-close" data-close aria-label="Закрыть бронирование">${icon("close")}</button></div>
+      <form class="booking-form" method="dialog" autocomplete="off" data-booking-form aria-describedby="booking-note">
+        <p class="panel-note" id="booking-note">Демонстрационная форма. Используйте вымышленные имя и телефон.</p>
+        <div class="booking-form-fields">
+          <label>Фамилия <input type="text" name="lastName" placeholder="Введите фамилию" maxlength="60"></label>
+          <label><span>Имя <span class="required-mark" aria-hidden="true">*</span></span><input type="text" name="firstName" placeholder="Введите имя" maxlength="60" required></label>
+          <label class="booking-phone"><span>Телефон <span class="required-mark" aria-hidden="true">*</span></span><input type="tel" name="phone" placeholder="+7 (000) 000-00-00" maxlength="24" required></label>
+          <label><span>Дата <span class="required-mark" aria-hidden="true">*</span></span><input type="date" name="date" required></label>
+          <label><span>Количество гостей <span class="required-mark" aria-hidden="true">*</span></span><select name="guests" required>
+            <option value="1">1 гость</option><option value="2" selected>2 гостя</option><option value="3">3 гостя</option><option value="4">4 гостя</option><option value="5">5 гостей</option><option value="6">6 гостей</option><option value="7">7 гостей</option><option value="8">8 гостей</option>
+          </select></label>
+          <label class="booking-time"><span>Время бронирования <span class="required-mark" aria-hidden="true">*</span></span><select name="time" required>
+            <option value="">Выбрать время</option><option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option><option>14:00</option><option>14:30</option><option>15:00</option><option>15:30</option><option>16:00</option><option>16:30</option><option>17:00</option><option>17:30</option><option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option><option>20:00</option><option>20:30</option><option>21:00</option><option>21:30</option>
+          </select></label>
+          <label class="booking-wishes">Пожелания <textarea name="wishes" placeholder="Например, столик у окна" rows="2" maxlength="500"></textarea></label>
+        </div>
         <button type="submit" class="button button-blue panel-action">Посмотреть демобронь ${icon("arrow")}</button>
       </form>
-      <p class="panel-note" id="booking-note">Время приведено для примера. Сервис бронирования подключим после согласования.</p>
       <p class="panel-status" data-booking-status role="status" aria-atomic="true"></p>
     </dialog>
     <p class="visually-hidden" data-announcement role="status" aria-atomic="true"></p>`;

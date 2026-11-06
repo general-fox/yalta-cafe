@@ -3,30 +3,60 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
   <meta name="theme-color" content="#f7f7f2">
   <meta name="description" content="Кафе «Ялта». Домашняя кухня, доставка и столик для встречи.">
   <meta name="robots" content="noindex, nofollow">
   <title>Кафе «Ялта» — домашняя кухня</title>
   <link rel="icon" href="assets/ya.svg?v=3" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/style.css?v=6">
-  <script src="assets/site-shell.js?v=5" defer></script>
-  <script src="assets/app.js?v=3" defer></script>
+  <link rel="stylesheet" href="assets/style.css?v=7">
+  <script src="assets/site-shell.js?v=7" defer></script>
+  <script src="assets/app.js?v=7" defer></script>
 </head>
 <body data-page="home">
   <div data-site-header></div>
   <main id="main">
     <section class="hero" aria-labelledby="hero-title">
+      <img class="hero-cover" src="assets/yalta-evening.jpg" width="1536" height="1024" alt="Визуализация зала «Ялты» в вечернем свете" fetchpriority="high">
       <div class="frame hero-inner">
         <p class="hero-edition">Кафе «Ялта»</p>
-        <div class="hero-art">
-          <img class="hero-plate" src="assets/hero-plate.webp" width="904" height="819" alt="Вареники со сметаной на белой тарелке с синим ободком" fetchpriority="high">
-        </div>
         <h1 id="hero-title">Домашняя <em>кухня</em></h1>
-        <p class="hero-description">Вареники ручной лепки, румяные сырники<br class="desktop-break"> и столик для тёплых встреч.</p>
-        <div class="hero-actions">
-          <a class="button button-paper" href="menu.html">Меню и доставка <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
-          <button type="button" class="button button-ghost" data-open="booking" aria-haspopup="dialog">Забронировать <svg class="icon" aria-hidden="true"><use href="#arrow-up"/></svg></button>
+        <p class="hero-description">Вареники ручной лепки, румяные сырники и столик для тёплых встреч.</p>
+        <div class="hero-info">
+          <dl class="hero-hours">
+            <dt>Часы работы кафе</dt>
+            <dd>Ежедневно, <time datetime="11:00">11:00</time>–<time datetime="23:00">23:00</time></dd>
+          </dl>
+          <small>Пример графика</small>
         </div>
+      </div>
+    </section>
+
+    <section class="frame home-menu" id="delivery" aria-labelledby="menu-preview-title">
+      <div class="home-menu-copy">
+        <p class="eyebrow">С доставкой домой</p>
+        <h2 class="section-title" id="menu-preview-title">Меню <em>доставки</em></h2>
+        <p>От сырников к завтраку до горячего на семейный ужин. Соберите заказ из любимых блюд.</p>
+        <a class="button button-blue" href="menu.html">Открыть всё меню <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+      </div>
+      <nav class="home-menu-links" aria-label="Разделы меню">
+        <a href="menu.html?category=breakfast"><img src="assets/syrniki-blue.jpg" width="508" height="508" alt="" loading="lazy"><span>Завтраки</span><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+        <a href="menu.html?category=main"><img src="assets/vareniki-blue.jpg" width="508" height="508" alt="" loading="lazy"><span>Горячее</span><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+        <a href="menu.html?category=dessert"><img src="assets/honeycake-blue.jpg" width="508" height="508" alt="" loading="lazy"><span>Десерты</span><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+      </nav>
+    </section>
+
+    <section class="frame home-loyalty" id="loyalty" aria-labelledby="home-loyalty-title">
+      <div class="home-loyalty-copy">
+        <p class="eyebrow">Для постоянных гостей</p>
+        <h2 class="section-title" id="home-loyalty-title">Карта гостя <em>«Ялты»</em></h2>
+        <p>Как добавить карту в телефон и показать её в кафе.</p>
+        <a class="button button-blue" href="loyalty.html">Как добавить карту <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
+      </div>
+      <div class="home-loyalty-card" aria-hidden="true">
+        <span>Карта гостя</span>
+        <img class="home-card-logo" src="assets/yalta.svg?v=3" width="170" height="53" alt="" loading="lazy">
+        <img class="home-card-wave" src="assets/wave2.svg?v=3" width="72" height="69" alt="" loading="lazy">
       </div>
     </section>
 
@@ -35,7 +65,6 @@
         <p class="eyebrow">О кафе</p>
         <h2 class="section-title" id="about-title">Встретимся<br> <em>за столом</em></h2>
         <p>В «Ялте» готовим знакомые с детства блюда. Заглядывайте на завтрак, собирайтесь на обед с близкими или заказывайте ужин домой.</p>
-        <button type="button" class="text-button" data-open="booking" aria-haspopup="dialog">Забронировать столик <svg class="icon" aria-hidden="true"><use href="#arrow-up"/></svg></button>
       </div>
       <figure class="about-photo">
         <img src="assets/room-blue.jpg" width="1536" height="1024" alt="Визуализация кафе с синей банкеткой, светлыми стенами и накрытыми столами" loading="lazy">
@@ -44,20 +73,6 @@
       <figure class="about-detail">
         <img src="assets/syrniki-blue.jpg" width="508" height="508" alt="Сырники со сметаной на фарфоровой тарелке" loading="lazy">
       </figure>
-    </section>
-
-    <section class="frame home-menu" id="delivery" aria-labelledby="menu-preview-title">
-      <div class="home-menu-copy">
-        <p class="eyebrow">С доставкой домой</p>
-        <h2 class="section-title" id="menu-preview-title">Меню «Ялты»</h2>
-        <p>От сырников к завтраку до горячего на семейный ужин.</p>
-        <a class="button button-paper" href="menu.html">Открыть всё меню <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
-      </div>
-      <nav class="home-menu-links" aria-label="Разделы меню">
-        <a href="menu.html?category=breakfast"><img src="assets/syrniki-blue.jpg" width="508" height="508" alt="" loading="lazy"><span>Завтраки</span><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
-        <a href="menu.html?category=main"><img src="assets/vareniki-blue.jpg" width="508" height="508" alt="" loading="lazy"><span>Горячее</span><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
-        <a href="menu.html?category=dessert"><img src="assets/honeycake-blue.jpg" width="508" height="508" alt="" loading="lazy"><span>Десерты</span><svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
-      </nav>
     </section>
 
     <section class="frame home-offers" id="offers" aria-labelledby="offers-title">
@@ -74,12 +89,6 @@
           <img class="offer-emblem" src="assets/ya.svg?v=3" width="160" height="126" alt="" loading="lazy">
         </article>
       </div>
-    </section>
-
-    <section class="frame home-loyalty" id="loyalty" aria-labelledby="home-loyalty-title">
-      <div class="home-loyalty-mark"><img src="assets/wave2.svg?v=3" width="58" height="56" alt=""></div>
-      <div><p class="eyebrow">Для постоянных гостей</p><h2 id="home-loyalty-title">Карта гостя «Ялты»</h2><p>Как добавить карту в телефон и показать её в кафе.</p></div>
-      <a class="button button-quiet" href="loyalty.html">Как добавить карту <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></a>
     </section>
 
     <section class="frame visit-section" id="contacts" aria-labelledby="visit-title">
